@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
-import { createUser, deleteUser, getUsers, updateUser } from "./userController";
+import {
+  createUser,
+  deleteUser,
+  getUsers,
+  updateUser,
+} from "../src/controllers/userController";
 
-jest.mock("../services/userService", () => {
+jest.mock("../src/services/userService", () => {
   return {
     __esModule: true,
     default: jest.fn().mockImplementation(() => {

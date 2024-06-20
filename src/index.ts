@@ -1,4 +1,5 @@
 import routes from "./routes";
+import { setupSwagger } from "./swaggerConfig";
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -9,6 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+setupSwagger(app);
 
 app.use("/verena-weikert", routes);
 

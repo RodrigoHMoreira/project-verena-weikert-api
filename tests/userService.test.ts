@@ -1,8 +1,8 @@
-import { userRepository } from "../repositories/userRepository";
-import { UserDTO } from "../interfaces/userDTO";
-import UserService from "./userService";
+import { userRepository } from "../src/repositories/userRepository";
+import { UserDTO } from "../src/interfaces/userDTO";
+import UserService from "../src/services/userService";
 
-jest.mock("../repositories/userRepository", () => ({
+jest.mock("../src/repositories/userRepository", () => ({
   userRepository: {
     findAll: jest.fn(() => Promise.resolve([])),
     create: jest.fn((data: UserDTO) =>
