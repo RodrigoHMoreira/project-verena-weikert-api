@@ -1,0 +1,24 @@
+#node
+node_modules/
+npm-debug.log*
+
+#build
+dist/
+build/
+out/
+
+#dev
+.env
+
+#logs
+logs
+*.log
+logs/*.log
+
+# VSCode
+.vscode/
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+prisma/.env
