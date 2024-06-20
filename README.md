@@ -101,10 +101,11 @@ Para acessar a documentação Swagger da API, siga os passos abaixo:
 
 1. Certifique-se de que o servidor da aplicação está em execução.
 
-2. Abra o seu navegador e vá para: http://localhost:8081/api-docs
+2. Abra o seu navegador e vá para:
+
+```
+http://localhost:8081/api-docs
+
+```
 
 3. Você será redirecionado para a interface do Swagger, onde poderá visualizar e interagir com os endpoints disponíveis na API.
-
-```
-
-```
