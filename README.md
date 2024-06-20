@@ -24,7 +24,7 @@
 1. Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis de ambiente:
    ```env
    DATABASE_URL="sua-string-de-conexao-do-banco-de-dados"
-   PORT=3000
+   PORT=8081
    ```
 
 ## Scripts Disponíveis
