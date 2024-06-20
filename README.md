@@ -89,5 +89,22 @@ project-verena-weikert/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
+
+## Swagger Documentation
+
+A documentação da API é fornecida usando Swagger, uma ferramenta que facilita a visualização e a interação com os endpoints da API.
+
+### Acessando a Documentação Swagger
+
+Para acessar a documentação Swagger da API, siga os passos abaixo:
+
+1. Certifique-se de que o servidor da aplicação está em execução.
+
+2. Abra o seu navegador e vá para: http://localhost:8081/api-docs
+
+3. Você será redirecionado para a interface do Swagger, onde poderá visualizar e interagir com os endpoints disponíveis na API.
+
+```
 
 ```
