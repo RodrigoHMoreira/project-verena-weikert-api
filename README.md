@@ -23,7 +23,7 @@
 
 1. Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis de ambiente:
    ```env
-   DATABASE_URL="dialect://usuario:senha@endereco-do-servidor:porta/nome-do-banco"
+   DATABASE_URL="mysql://usuario:senha@endereco-do-servidor:porta/nome-do-banco"
    PORT=8081
    ```
 
