@@ -5,9 +5,7 @@ const prisma = new PrismaClient();
 
 export class UserRepository {
   async findAll(): Promise<UserDTO[]> {
-    const users = await prisma.user.findMany({
-      include: { tg_user: true },
-    });
+    const users = await prisma.users.findMany({});
 
     return users.map(
       (user) =>
@@ -20,14 +18,12 @@ export class UserRepository {
   }
 
   async create(data: UserDTO): Promise<UserDTO> {
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.users.create({
       data: {
         nm_user: data.nm_user,
         ds_email: data.ds_email,
       },
     });
-
-    console.log(data, newUser);
 
     return {
       nm_user: newUser.nm_user,
@@ -36,7 +32,7 @@ export class UserRepository {
   }
 
   async update(id: number, data: Partial<UserDTO>): Promise<UserDTO> {
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await prisma.users.update({
       where: { cd_user: id },
       data: {
         nm_user: data.nm_user,
@@ -52,7 +48,7 @@ export class UserRepository {
   }
 
   async delete(id: number): Promise<void> {
-    await prisma.user.delete({ where: { cd_user: id } });
+    await prisma.users.delete({ where: { cd_user: id } });
   }
 }
 
