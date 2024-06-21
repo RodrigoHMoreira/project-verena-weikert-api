@@ -13,6 +13,9 @@ export class UserRepository {
           cd_user: user.cd_user,
           nm_user: user.nm_user,
           ds_email: user.ds_email,
+          nb_telephone: user.nb_telephone,
+          url_image: user.url_image,
+          tp_user: user.tp_user,
         } as UserDTO)
     );
   }
@@ -22,12 +25,18 @@ export class UserRepository {
       data: {
         nm_user: data.nm_user,
         ds_email: data.ds_email,
+        nb_telephone: data.nb_telephone,
+        url_image: data.url_image,
+        tp_user: data.tp_user,
       },
     });
 
     return {
       nm_user: newUser.nm_user,
       ds_email: newUser.ds_email,
+      nb_telephone: newUser.nb_telephone,
+      url_image: newUser.url_image,
+      tp_user: newUser.tp_user,
     };
   }
 
@@ -37,6 +46,9 @@ export class UserRepository {
       data: {
         nm_user: data.nm_user,
         ds_email: data.ds_email,
+        nb_telephone: data.nb_telephone,
+        url_image: data.url_image,
+        tp_user: data.tp_user,
       },
     });
 
@@ -44,6 +56,9 @@ export class UserRepository {
       cd_user: updatedUser.cd_user,
       nm_user: updatedUser.nm_user,
       ds_email: updatedUser.ds_email,
+      nb_telephone: updatedUser.nb_telephone,
+      url_image: updatedUser.url_image,
+      tp_user: updatedUser.tp_user,
     } as UserDTO;
   }
 
