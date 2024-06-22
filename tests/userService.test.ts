@@ -5,6 +5,7 @@ import UserService from "../src/services/userService";
 jest.mock("../src/repositories/userRepository", () => ({
   userRepository: {
     findAll: jest.fn(() => Promise.resolve([])),
+    findById: jest.fn(() => Promise.resolve({})),
     create: jest.fn((data: UserDTO) =>
       Promise.resolve({ ...data, cd_user: 1 })
     ),
@@ -26,11 +27,17 @@ describe("UserService", () => {
         cd_user: 2,
         nm_user: "Maria Silva",
         ds_email: "silvamaria@email.com",
+        nb_telephone: "(19) 9999-9999",
+        url_image: "http://url...",
+        tp_user: "guest",
       },
       {
         cd_user: 3,
         nm_user: "João Santos",
         ds_email: "snatosJoao@email.com",
+        nb_telephone: "(19) 9999-9999",
+        url_image: "http://url...",
+        tp_user: "guest",
       },
     ];
 
@@ -43,10 +50,32 @@ describe("UserService", () => {
     expect(userRepository.findAll).toHaveBeenCalledTimes(1);
   });
 
+  it("should get user by Id successfully", async () => {
+    const mockUser: UserDTO | null = {
+      cd_user: 2,
+      nm_user: "Maria Silva",
+      ds_email: "silvamaria@email.com",
+      nb_telephone: "(19) 9999-9999",
+      url_image: "http://url...",
+      tp_user: "guest",
+    };
+
+    (userRepository.findById as jest.Mock).mockResolvedValue(mockUser);
+
+    const userService = new UserService();
+    const users = await userService.getUserById(2);
+
+    expect(users).toEqual(mockUser);
+    expect(userRepository.findById).toHaveBeenCalledTimes(1);
+  });
+
   it("should create a new user successfully", async () => {
     const userData: UserDTO = {
       nm_user: "José Souza",
       ds_email: "souzajose@email.com",
+      nb_telephone: "(19) 9999-9999",
+      url_image: "http://url...",
+      tp_user: "guest",
     };
     const newUser: UserDTO = { ...userData, cd_user: 1 };
 

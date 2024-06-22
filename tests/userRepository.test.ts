@@ -9,6 +9,7 @@ jest.mock("@prisma/client", () => {
   const mockPrisma = {
     users: {
       findMany: jest.fn(),
+      findUnique: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
@@ -26,12 +27,18 @@ describe("UserRepository", () => {
       cd_user: 2,
       nm_user: "Maria Silva",
       ds_email: "silvamaria@email.com",
+      nb_telephone: "(19) 9999-9999",
+      url_image: "http://url...",
+      tp_user: "guest",
     }),
       (mockUsers = [
         {
           cd_user: 2,
           nm_user: "Maria Silva",
           ds_email: "silvamaria@email.com",
+          nb_telephone: "(19) 9999-9999",
+          url_image: "http://url...",
+          tp_user: "guest",
         },
       ]);
   });
@@ -49,19 +56,35 @@ describe("UserRepository", () => {
     expect(users).toEqual(mockUsers);
   });
 
+  it("should find user by id", async () => {
+    (prisma.users.findUnique as jest.Mock).mockResolvedValue(mockUser);
+
+    const users = await userRepository.findById(2);
+
+    expect(prisma.users.findUnique).toHaveBeenCalledTimes(1);
+    expect(users).toEqual(mockUser);
+  });
+
   it("should create a new user", async () => {
     (prisma.users.create as jest.Mock).mockResolvedValue(mockUser);
 
     const newUser = await userRepository.create(mockUser);
 
     expect(newUser).toEqual({
-      nm_user: mockUser.nm_user,
-      ds_email: mockUser.ds_email,
+      nm_user: newUser.nm_user,
+      ds_email: newUser.ds_email,
+      nb_telephone: newUser.nb_telephone,
+      url_image: newUser.url_image,
+      tp_user: newUser.tp_user,
     });
+
     expect(prisma.users.create).toHaveBeenCalledWith({
       data: {
         nm_user: mockUser.nm_user,
         ds_email: mockUser.ds_email,
+        nb_telephone: mockUser.nb_telephone,
+        url_image: mockUser.url_image,
+        tp_user: mockUser.tp_user,
       },
     });
     expect(prisma.users.create).toHaveBeenCalledTimes(1);

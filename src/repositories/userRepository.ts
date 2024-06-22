@@ -20,6 +20,27 @@ export class UserRepository {
     );
   }
 
+  async findById(id: number): Promise<UserDTO | null> {
+    const user = await prisma.users.findUnique({
+      where: {
+        cd_user: id,
+      },
+    });
+
+    if (!user) {
+      throw Error("Usuário não encontrado");
+    }
+
+    return {
+      cd_user: user.cd_user,
+      nm_user: user.nm_user,
+      ds_email: user.ds_email,
+      nb_telephone: user.nb_telephone,
+      url_image: user.url_image,
+      tp_user: user.tp_user,
+    };
+  }
+
   async create(data: UserDTO): Promise<UserDTO> {
     const newUser = await prisma.users.create({
       data: {

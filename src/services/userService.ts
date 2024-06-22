@@ -11,6 +11,15 @@ export default class UserService {
     }
   }
 
+  async getUserById(id: number): Promise<UserDTO | null> {
+    try {
+      const user: UserDTO | null = await userRepository.findById(id);
+      return user;
+    } catch (error) {
+      throw new Error(`Error getting user: ${error}`);
+    }
+  }
+
   async createUser(data: UserDTO): Promise<UserDTO> {
     try {
       const newUser = await userRepository.create(data);

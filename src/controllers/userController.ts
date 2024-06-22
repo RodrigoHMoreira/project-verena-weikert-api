@@ -13,6 +13,18 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const user: UserDTO | null = await userService.getUserById(Number(id));
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: `Failed to fetch user: ${error}` });
+  }
+};
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const data: UserDTO = req.body;

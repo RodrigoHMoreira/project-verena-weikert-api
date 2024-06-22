@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createUser,
   deleteUser,
+  getUserById,
   getUsers,
   updateUser,
 } from "../src/controllers/userController";
@@ -23,6 +24,11 @@ jest.mock("../src/services/userService", () => {
             ds_email: "snatosJoao@email.com",
           },
         ]),
+        getUserById: jest.fn().mockResolvedValue({
+          cd_user: 2,
+          nm_user: "João Santos",
+          ds_email: "snatosJoao@email.com",
+        }),
         createUser: jest
           .fn()
           .mockImplementation((data) =>
@@ -66,6 +72,18 @@ describe("User Controller", () => {
         ds_email: "snatosJoao@email.com",
       },
     ]);
+  });
+
+  it("should get user by Id successfully", async () => {
+    req.params = { id: "1" };
+
+    await getUserById(req as Request, res as Response);
+
+    expect(res.json).toHaveBeenCalledWith({
+      cd_user: 2,
+      nm_user: "João Santos",
+      ds_email: "snatosJoao@email.com",
+    });
   });
 
   it("should create a new user successfully", async () => {
