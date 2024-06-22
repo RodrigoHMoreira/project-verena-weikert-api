@@ -9,19 +9,24 @@ export class UserRepository {
     take: number,
     search?: string
   ): Promise<UserDTO[]> {
-    const lowercaseSearch = search ? search.toLowerCase() : undefined;
+    try {
+      const users = await prisma.users.findMany({
+        skip: skip,
+        take: take,
+        where: {
+          OR: [
+            { nm_user: { contains: search && search.toLowerCase() } },
+            { ds_email: { contains: search && search.toLowerCase() } },
+            { nb_telephone: { contains: search && search.toLowerCase() } },
+          ],
+        },
+      });
 
-    return prisma.users.findMany({
-      skip: skip,
-      take: take,
-      where: {
-        OR: [
-          { nm_user: { contains: lowercaseSearch } },
-          { ds_email: { contains: lowercaseSearch } },
-          { nb_telephone: { contains: lowercaseSearch } },
-        ],
-      },
-    });
+      return users;
+    } catch (error) {
+      console.error(`Error in UserRepository.findAll: ${error}`);
+      throw new Error(`Failed to fetch users: ${error}`);
+    }
   }
 
   async countAll(search?: string): Promise<number> {
