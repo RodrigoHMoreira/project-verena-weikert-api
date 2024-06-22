@@ -50,7 +50,7 @@ describe("UserRepository", () => {
   it("should find all users", async () => {
     (prisma.users.findMany as jest.Mock).mockResolvedValue(mockUsers);
 
-    const users = await userRepository.findAll();
+    const users = await userRepository.findAll(1, 10);
 
     expect(prisma.users.findMany).toHaveBeenCalledTimes(1);
     expect(users).toEqual(mockUsers);

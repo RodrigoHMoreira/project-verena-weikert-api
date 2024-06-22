@@ -4,20 +4,36 @@ import { UserDTO } from "../interfaces/userDTO";
 const prisma = new PrismaClient();
 
 export class UserRepository {
-  async findAll(): Promise<UserDTO[]> {
-    const users = await prisma.users.findMany({});
+  async findAll(
+    skip: number,
+    take: number,
+    search?: string
+  ): Promise<UserDTO[]> {
+    const lowercaseSearch = search ? search.toLowerCase() : undefined;
 
-    return users.map(
-      (user) =>
-        ({
-          cd_user: user.cd_user,
-          nm_user: user.nm_user,
-          ds_email: user.ds_email,
-          nb_telephone: user.nb_telephone,
-          url_image: user.url_image,
-          tp_user: user.tp_user,
-        } as UserDTO)
-    );
+    return prisma.users.findMany({
+      skip: skip,
+      take: take,
+      where: {
+        OR: [
+          { nm_user: { contains: lowercaseSearch } },
+          { ds_email: { contains: lowercaseSearch } },
+          { nb_telephone: { contains: lowercaseSearch } },
+        ],
+      },
+    });
+  }
+
+  async countAll(search?: string): Promise<number> {
+    const lowercaseSearch = search?.toLowerCase();
+
+    return prisma.users.count({
+      where: {
+        nm_user: { contains: lowercaseSearch },
+        ds_email: { contains: lowercaseSearch },
+        nb_telephone: { contains: lowercaseSearch },
+      },
+    });
   }
 
   async findById(id: number): Promise<UserDTO | null> {

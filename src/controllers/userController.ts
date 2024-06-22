@@ -4,8 +4,11 @@ import UserService from "../services/userService";
 const userService = new UserService();
 
 export const getUsers = async (req: Request, res: Response) => {
+  const { page = 1, limit = 6, search = "" } = req.query;
+
   try {
-    const users: UserDTO[] = await userService.getUsers();
+    const users: { items: UserDTO[]; totalPages: number } =
+      await userService.getUsers(Number(page), Number(limit), String(search));
 
     res.json(users);
   } catch (error) {

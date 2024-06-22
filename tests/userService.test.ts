@@ -5,6 +5,7 @@ import UserService from "../src/services/userService";
 jest.mock("../src/repositories/userRepository", () => ({
   userRepository: {
     findAll: jest.fn(() => Promise.resolve([])),
+    countAll: jest.fn(() => Promise.resolve()),
     findById: jest.fn(() => Promise.resolve({})),
     create: jest.fn((data: UserDTO) =>
       Promise.resolve({ ...data, cd_user: 1 })
@@ -41,13 +42,24 @@ describe("UserService", () => {
       },
     ];
 
+    const page = 1;
+    const limit = 10;
+    const search = undefined;
+
     (userRepository.findAll as jest.Mock).mockResolvedValue(mockUsers);
+    (userRepository.countAll as jest.Mock).mockResolvedValue(mockUsers.length);
 
     const userService = new UserService();
-    const users = await userService.getUsers();
+    const { items, totalPages } = await userService.getUsers(
+      page,
+      limit,
+      search
+    );
 
-    expect(users).toEqual(mockUsers);
+    expect(items).toEqual(mockUsers);
+    expect(totalPages).toEqual(1);
     expect(userRepository.findAll).toHaveBeenCalledTimes(1);
+    expect(userRepository.countAll).toHaveBeenCalledTimes(1);
   });
 
   it("should get user by Id successfully", async () => {

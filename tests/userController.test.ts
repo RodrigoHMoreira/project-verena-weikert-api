@@ -12,18 +12,21 @@ jest.mock("../src/services/userService", () => {
     __esModule: true,
     default: jest.fn().mockImplementation(() => {
       return {
-        getUsers: jest.fn().mockResolvedValue([
-          {
-            cd_user: 1,
-            nm_user: "Maria Silva",
-            ds_email: "silvamaria@email.com",
-          },
-          {
-            cd_user: 2,
-            nm_user: "João Santos",
-            ds_email: "snatosJoao@email.com",
-          },
-        ]),
+        getUsers: jest.fn().mockResolvedValue({
+          items: [
+            {
+              cd_user: 1,
+              nm_user: "Maria Silva",
+              ds_email: "silvamaria@email.com",
+            },
+            {
+              cd_user: 2,
+              nm_user: "João Santos",
+              ds_email: "snatosJoao@email.com",
+            },
+          ],
+          totalPages: 1,
+        }),
         getUserById: jest.fn().mockResolvedValue({
           cd_user: 2,
           nm_user: "João Santos",
@@ -58,20 +61,24 @@ describe("User Controller", () => {
   });
 
   it("should get users successfully", async () => {
-    await getUsers(req as Request, res as Response);
+    (req.query = { page: "1", limit: "10", search: "John" }),
+      await getUsers(req as Request, res as Response);
 
-    expect(res.json).toHaveBeenCalledWith([
-      {
-        cd_user: 1,
-        nm_user: "Maria Silva",
-        ds_email: "silvamaria@email.com",
-      },
-      {
-        cd_user: 2,
-        nm_user: "João Santos",
-        ds_email: "snatosJoao@email.com",
-      },
-    ]);
+    expect(res.json).toHaveBeenCalledWith({
+      items: [
+        {
+          cd_user: 1,
+          ds_email: "silvamaria@email.com",
+          nm_user: "Maria Silva",
+        },
+        {
+          cd_user: 2,
+          ds_email: "snatosJoao@email.com",
+          nm_user: "João Santos",
+        },
+      ],
+      totalPages: 1,
+    });
   });
 
   it("should get user by Id successfully", async () => {

@@ -2,10 +2,19 @@ import { UserDTO } from "../interfaces/userDTO";
 import { userRepository } from "../repositories/userRepository";
 
 export default class UserService {
-  async getUsers(): Promise<UserDTO[]> {
+  async getUsers(
+    page: number,
+    limit: number,
+    search?: string
+  ): Promise<{ items: UserDTO[]; totalPages: number }> {
     try {
-      const users: UserDTO[] = await userRepository.findAll();
-      return users;
+      const offset = (page - 1) * limit;
+      const users = await userRepository.findAll(offset, limit, search);
+
+      const totalCount = await userRepository.countAll(search);
+      const totalPages = Math.ceil(totalCount / limit);
+
+      return { items: users, totalPages };
     } catch (error) {
       throw new Error(`Error getting users: ${error}`);
     }
