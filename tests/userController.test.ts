@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import {
   createUser,
-  deleteUser,
-  getUserById,
-  getUsers,
   updateUser,
-} from "../src/controllers/userController";
+  deleteUser,
+} from "../src/controllers/authController";
+import { getUserById, getUsers } from "../src/controllers/userController";
+
+import jwt from "jsonwebtoken";
 
 jest.mock("../src/services/userService", () => {
   return {
@@ -95,17 +96,19 @@ describe("User Controller", () => {
 
   it("should create a new user successfully", async () => {
     req.body = {
-      nm_user: "José Souza",
-      ds_email: "souzajose@email.com",
+      ds_email: "bruno.souza@example.com",
+      hs_password: "123",
     };
+
+    const token = jwt.sign({ user_id: "someUserId" }, process.env.JWT_SECRET!);
+    req.headers = { Authorization: `Bearer ${token}` };
 
     await createUser(req as Request, res as Response);
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({
-        nm_user: "José Souza",
-        ds_email: "souzajose@email.com",
+        ds_email: "bruno.souza@example.com",
       })
     );
   });

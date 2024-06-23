@@ -4,5 +4,5 @@ export interface UserDTO {
   ds_email: string;
   nb_telephone: string;
   url_image: string;
-  tp_user: string;
+  hs_password: string;
 }

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { UserRepository } from "../src/repositories/userRepository";
 import { UserDTO } from "../src/interfaces/userDTO";
+import { UserRepository } from "../src/repositories/userRepository";
 
 const prisma = new PrismaClient();
 const userRepository = new UserRepository();
@@ -29,7 +29,7 @@ describe("UserRepository", () => {
       ds_email: "silvamaria@email.com",
       nb_telephone: "(19) 9999-9999",
       url_image: "http://url...",
-      tp_user: "guest",
+      hs_password: "5588",
     }),
       (mockUsers = [
         {
@@ -38,7 +38,7 @@ describe("UserRepository", () => {
           ds_email: "silvamaria@email.com",
           nb_telephone: "(19) 9999-9999",
           url_image: "http://url...",
-          tp_user: "guest",
+          hs_password: "6699",
         },
       ]);
   });
@@ -75,7 +75,7 @@ describe("UserRepository", () => {
       ds_email: newUser.ds_email,
       nb_telephone: newUser.nb_telephone,
       url_image: newUser.url_image,
-      tp_user: newUser.tp_user,
+      hs_password: newUser.hs_password,
     });
 
     expect(prisma.users.create).toHaveBeenCalledWith({
@@ -84,7 +84,7 @@ describe("UserRepository", () => {
         ds_email: mockUser.ds_email,
         nb_telephone: mockUser.nb_telephone,
         url_image: mockUser.url_image,
-        tp_user: mockUser.tp_user,
+        hs_password: mockUser.hs_password,
       },
     });
     expect(prisma.users.create).toHaveBeenCalledTimes(1);

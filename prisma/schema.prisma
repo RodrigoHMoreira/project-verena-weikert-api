@@ -8,10 +8,12 @@ generator client {
 }
 
 model Users {
-  cd_user      Int      @id @default(autoincrement())
-  nm_user      String   @db.VarChar(191)
-  ds_email     String   @db.VarChar(191)
-  nb_telephone String   @db.VarChar(15)
-  url_image    String   @db.VarChar(2048)
-  tp_user      String   @db.VarChar(45)
+  cd_user       Int      @id @default(autoincrement())
+  nm_user       String   @db.VarChar(191)
+  ds_email      String   @db.VarChar(191) @unique
+  nb_telephone  String   @db.VarChar(15)
+  url_image     String   @db.VarChar(2048)
+  hs_password   String   @db.VarChar(255)
 }
+
+

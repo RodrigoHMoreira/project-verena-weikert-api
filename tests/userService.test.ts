@@ -30,7 +30,7 @@ describe("UserService", () => {
         ds_email: "silvamaria@email.com",
         nb_telephone: "(19) 9999-9999",
         url_image: "http://url...",
-        tp_user: "guest",
+        hs_password: "",
       },
       {
         cd_user: 3,
@@ -38,7 +38,7 @@ describe("UserService", () => {
         ds_email: "snatosJoao@email.com",
         nb_telephone: "(19) 9999-9999",
         url_image: "http://url...",
-        tp_user: "guest",
+        hs_password: "",
       },
     ];
 
@@ -69,7 +69,7 @@ describe("UserService", () => {
       ds_email: "silvamaria@email.com",
       nb_telephone: "(19) 9999-9999",
       url_image: "http://url...",
-      tp_user: "guest",
+      hs_password: "",
     };
 
     (userRepository.findById as jest.Mock).mockResolvedValue(mockUser);
@@ -87,7 +87,7 @@ describe("UserService", () => {
       ds_email: "souzajose@email.com",
       nb_telephone: "(19) 9999-9999",
       url_image: "http://url...",
-      tp_user: "guest",
+      hs_password: "5588",
     };
     const newUser: UserDTO = { ...userData, cd_user: 1 };
 

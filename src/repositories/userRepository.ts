@@ -58,7 +58,7 @@ export class UserRepository {
       ds_email: user.ds_email,
       nb_telephone: user.nb_telephone,
       url_image: user.url_image,
-      tp_user: user.tp_user,
+      hs_password: user.hs_password,
     };
   }
 
@@ -69,7 +69,7 @@ export class UserRepository {
         ds_email: data.ds_email,
         nb_telephone: data.nb_telephone,
         url_image: data.url_image,
-        tp_user: data.tp_user,
+        hs_password: data.hs_password,
       },
     });
 
@@ -78,7 +78,7 @@ export class UserRepository {
       ds_email: newUser.ds_email,
       nb_telephone: newUser.nb_telephone,
       url_image: newUser.url_image,
-      tp_user: newUser.tp_user,
+      hs_password: newUser.hs_password,
     };
   }
 
@@ -90,7 +90,7 @@ export class UserRepository {
         ds_email: data.ds_email,
         nb_telephone: data.nb_telephone,
         url_image: data.url_image,
-        tp_user: data.tp_user,
+        hs_password: data.hs_password,
       },
     });
 
@@ -100,7 +100,7 @@ export class UserRepository {
       ds_email: updatedUser.ds_email,
       nb_telephone: updatedUser.nb_telephone,
       url_image: updatedUser.url_image,
-      tp_user: updatedUser.tp_user,
+      hs_password: updatedUser.hs_password,
     } as UserDTO;
   }
 
