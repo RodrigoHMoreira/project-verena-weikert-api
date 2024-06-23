@@ -1,5 +1,5 @@
+import { User } from "../src/interfaces/User";
 import { userRepository } from "../src/repositories/userRepository";
-import { UserDTO } from "../src/interfaces/userDTO";
 import UserService from "../src/services/userService";
 
 jest.mock("../src/repositories/userRepository", () => ({
@@ -7,10 +7,8 @@ jest.mock("../src/repositories/userRepository", () => ({
     findAll: jest.fn(() => Promise.resolve([])),
     countAll: jest.fn(() => Promise.resolve()),
     findById: jest.fn(() => Promise.resolve({})),
-    create: jest.fn((data: UserDTO) =>
-      Promise.resolve({ ...data, cd_user: 1 })
-    ),
-    update: jest.fn((id: number, data: Partial<UserDTO>) =>
+    create: jest.fn((data: User) => Promise.resolve({ ...data, cd_user: 1 })),
+    update: jest.fn((id: number, data: Partial<User>) =>
       Promise.resolve({ ...data, cd_user: id })
     ),
     delete: jest.fn((id: number) => Promise.resolve()),
@@ -23,7 +21,7 @@ describe("UserService", () => {
   });
 
   it("should get users successfully", async () => {
-    const mockUsers: UserDTO[] = [
+    const mockUsers: User[] = [
       {
         cd_user: 2,
         nm_user: "Maria Silva",
@@ -63,7 +61,7 @@ describe("UserService", () => {
   });
 
   it("should get user by Id successfully", async () => {
-    const mockUser: UserDTO | null = {
+    const mockUser: User | null = {
       cd_user: 2,
       nm_user: "Maria Silva",
       ds_email: "silvamaria@email.com",
@@ -82,14 +80,14 @@ describe("UserService", () => {
   });
 
   it("should create a new user successfully", async () => {
-    const userData: UserDTO = {
+    const userData: User = {
       nm_user: "José Souza",
       ds_email: "souzajose@email.com",
       nb_telephone: "(19) 9999-9999",
       url_image: "http://url...",
       hs_password: "5588",
     };
-    const newUser: UserDTO = { ...userData, cd_user: 1 };
+    const newUser: User = { ...userData, cd_user: 1 };
 
     (userRepository.create as jest.Mock).mockResolvedValue(newUser);
 
@@ -103,7 +101,7 @@ describe("UserService", () => {
 
   it("should update an existing user successfully", async () => {
     const userId = 2;
-    const updatedData: Partial<UserDTO> = {
+    const updatedData: Partial<User> = {
       cd_user: 2,
       nm_user: "Maria Silva",
       ds_email: "silvamaria@email.com",

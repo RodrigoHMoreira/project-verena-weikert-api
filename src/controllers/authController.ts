@@ -3,14 +3,15 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import UserService from "../services/userService";
-import { UserDTO } from "../interfaces/userDTO";
+import { User } from "../interfaces/User";
+import { UserDTO } from "../interfaces/UserDTO";
 
 const userService = new UserService();
 const prisma = new PrismaClient();
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const data: UserDTO = req.body;
+    const data: User = req.body;
     const salt = await bcrypt.genSalt(8);
     const hashedPassword = await bcrypt.hash(data.hs_password, salt);
     const newUser = await userService.createUser({
@@ -28,7 +29,7 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const data: Partial<UserDTO> = req.body;
+    const data: Partial<User> = req.body;
     const updatedUser = await userService.updateUser(Number(id), data);
 
     res.json(updatedUser);
@@ -68,7 +69,15 @@ export const login = async (req: Request, res: Response) => {
       expiresIn: "1d",
     });
 
-    res.send({ token });
+    const userDTO = new UserDTO({
+      cd_user: user.cd_user,
+      nm_user: user.nm_user,
+      ds_email: user.ds_email,
+      nb_telephone: user.nb_telephone,
+      url_image: user.url_image,
+    });
+
+    res.send({ token: token, user: userDTO });
   } catch (error) {
     res.status(500).send(error);
   }

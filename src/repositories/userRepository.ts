@@ -1,14 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { UserDTO } from "../interfaces/userDTO";
+import { User } from "../interfaces/User";
 
 const prisma = new PrismaClient();
 
 export class UserRepository {
-  async findAll(
-    skip: number,
-    take: number,
-    search?: string
-  ): Promise<UserDTO[]> {
+  async findAll(skip: number, take: number, search?: string): Promise<User[]> {
     try {
       const users = await prisma.users.findMany({
         skip: skip,
@@ -41,7 +37,7 @@ export class UserRepository {
     });
   }
 
-  async findById(id: number): Promise<UserDTO | null> {
+  async findById(id: number): Promise<User | null> {
     const user = await prisma.users.findUnique({
       where: {
         cd_user: id,
@@ -62,7 +58,7 @@ export class UserRepository {
     };
   }
 
-  async create(data: UserDTO): Promise<UserDTO> {
+  async create(data: User): Promise<User> {
     const newUser = await prisma.users.create({
       data: {
         nm_user: data.nm_user,
@@ -82,7 +78,7 @@ export class UserRepository {
     };
   }
 
-  async update(id: number, data: Partial<UserDTO>): Promise<UserDTO> {
+  async update(id: number, data: Partial<User>): Promise<User> {
     const updatedUser = await prisma.users.update({
       where: { cd_user: id },
       data: {
@@ -101,7 +97,7 @@ export class UserRepository {
       nb_telephone: updatedUser.nb_telephone,
       url_image: updatedUser.url_image,
       hs_password: updatedUser.hs_password,
-    } as UserDTO;
+    } as User;
   }
 
   async delete(id: number): Promise<void> {

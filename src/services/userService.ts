@@ -1,4 +1,4 @@
-import { UserDTO } from "../interfaces/userDTO";
+import { User } from "../interfaces/User";
 import { userRepository } from "../repositories/userRepository";
 
 export default class UserService {
@@ -6,7 +6,7 @@ export default class UserService {
     page: number,
     limit: number,
     search?: string
-  ): Promise<{ items: UserDTO[]; totalPages: number }> {
+  ): Promise<{ items: User[]; totalPages: number }> {
     try {
       const offset = (page - 1) * limit;
       const users = await userRepository.findAll(offset, limit, search);
@@ -20,16 +20,16 @@ export default class UserService {
     }
   }
 
-  async getUserById(id: number): Promise<UserDTO | null> {
+  async getUserById(id: number): Promise<User | null> {
     try {
-      const user: UserDTO | null = await userRepository.findById(id);
+      const user: User | null = await userRepository.findById(id);
       return user;
     } catch (error) {
       throw new Error(`Error getting user: ${error}`);
     }
   }
 
-  async createUser(data: UserDTO): Promise<UserDTO> {
+  async createUser(data: User): Promise<User> {
     try {
       const newUser = await userRepository.create(data);
       return newUser;
@@ -38,7 +38,7 @@ export default class UserService {
     }
   }
 
-  async updateUser(id: number, data: Partial<UserDTO>): Promise<UserDTO> {
+  async updateUser(id: number, data: Partial<User>): Promise<User> {
     try {
       const updatedUser = await userRepository.update(id, data);
       return updatedUser;

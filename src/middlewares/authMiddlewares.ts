@@ -9,7 +9,7 @@ export const authMiddleware = (
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    return res.status(401).send({ error: "Access denied, no token provided." });
+    return res.status(401).send({ error: token });
   }
 
   try {

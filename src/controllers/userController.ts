@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserDTO } from "../interfaces/userDTO";
+import { User } from "../interfaces/User";
 import UserService from "../services/userService";
 const userService = new UserService();
 
@@ -7,7 +7,7 @@ export const getUsers = async (req: Request, res: Response) => {
   const { page = 1, limit = 6, search = "" } = req.query;
 
   try {
-    const users: { items: UserDTO[]; totalPages: number } =
+    const users: { items: User[]; totalPages: number } =
       await userService.getUsers(Number(page), Number(limit), String(search));
 
     res.json(users);
@@ -20,7 +20,7 @@ export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const user: UserDTO | null = await userService.getUserById(Number(id));
+    const user: User | null = await userService.getUserById(Number(id));
 
     res.json(user);
   } catch (error) {

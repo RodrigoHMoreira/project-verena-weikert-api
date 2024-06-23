@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { UserDTO } from "../src/interfaces/userDTO";
+import { User } from "../src/interfaces/User";
 import { UserRepository } from "../src/repositories/userRepository";
 
 const prisma = new PrismaClient();
@@ -19,8 +19,8 @@ jest.mock("@prisma/client", () => {
 });
 
 describe("UserRepository", () => {
-  let mockUser: UserDTO;
-  let mockUsers: UserDTO[];
+  let mockUser: User;
+  let mockUsers: User[];
 
   beforeAll(() => {
     (mockUser = {
