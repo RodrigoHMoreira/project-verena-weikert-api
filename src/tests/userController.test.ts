@@ -3,12 +3,12 @@ import {
   createUser,
   updateUser,
   deleteUser,
-} from "../src/controllers/authController";
-import { getUserById, getUsers } from "../src/controllers/userController";
+} from "../controllers/authController";
+import { getUserById, getUsers } from "../controllers/userController";
 
 import jwt from "jsonwebtoken";
 
-jest.mock("../src/services/userService", () => {
+jest.mock("../services/userService", () => {
   return {
     __esModule: true,
     default: jest.fn().mockImplementation(() => {
