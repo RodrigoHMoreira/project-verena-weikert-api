@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install -g npm@latest
 
 # Clean npm cache (optional, if needed)
-RUN npm cache clean --force
+RUN npm cache clean 
 
 # Install Prisma separately if needed
 RUN npm install prisma --no-save
