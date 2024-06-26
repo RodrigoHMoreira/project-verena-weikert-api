@@ -13,9 +13,6 @@ RUN npm install -g npm@latest
 # Copia o restante do código da aplicação para o diretório de trabalho
 COPY . .
 
-# Compila a aplicação TypeScript
-RUN npm run build
-
 # Expõe a porta na qual a aplicação será executada
 EXPOSE 3000
 
