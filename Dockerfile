@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install -g npm@latest
 
 # Instala o Prisma, se necessário
-RUN npm install prisma --no-save
+RUN npm install prisma 
 
 # Instala as dependências do npm, incluindo as devDependencies
 RUN npm install --production=false
