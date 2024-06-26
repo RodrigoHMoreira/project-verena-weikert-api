@@ -7,6 +7,15 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Update npm (optional, if needed)
+RUN npm install -g npm@latest
+
+# Clean npm cache (optional, if needed)
+RUN npm cache clean --force
+
+# Install Prisma separately if needed
+RUN npm install prisma --no-save
+
 # Install npm dependencies including devDependencies
 RUN npm install --production=false
 
