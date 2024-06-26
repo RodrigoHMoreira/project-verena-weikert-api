@@ -1,29 +1,29 @@
-# Use the official Node.js image with TypeScript support as a parent image
+# Use a versão do Node.js 14 com Alpine Linux
 FROM node:14-alpine
 
-# Set the working directory in the container
+# Define o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copia os arquivos de package.json e package-lock.json para o diretório de trabalho
 COPY package*.json ./
 
-# Update npm to the latest version (optional, if needed)
+# Atualiza o npm para a versão mais recente
 RUN npm install -g npm@latest
 
-# Install Prisma separately if needed
+# Instala o Prisma, se necessário
 RUN npm install prisma --no-save
 
-# Install npm dependencies including devDependencies
+# Instala as dependências do npm, incluindo as devDependencies
 RUN npm install --production=false
 
-# Copy the rest of the application code to the working directory
+# Copia o restante do código da aplicação para o diretório de trabalho
 COPY . .
 
-# Build the TypeScript application
+# Compila a aplicação TypeScript
 RUN npm run build
 
-# Expose the port the app runs on
+# Expõe a porta na qual a aplicação será executada
 EXPOSE 3000
 
-# Command to run the application
+# Comando para iniciar a aplicação
 CMD ["npm", "start"]
