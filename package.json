@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "dev": "nodemon",
-    "build": "react-scripts build && mv build public",
+    "build": "tsc && mv dist public",
     "test": "jest",
     "test:watch": "jest --watch",
     "migrate": "prisma migrate dev",
