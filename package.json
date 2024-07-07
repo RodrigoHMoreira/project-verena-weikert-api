@@ -14,7 +14,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "migrate": "prisma migrate dev",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "keywords": [
     "CRUD",
