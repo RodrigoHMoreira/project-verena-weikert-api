@@ -13,11 +13,12 @@ app.use(cors());
 
 setupSwagger(app);
 
-app.use("/verena-weikert", routes);
+app.use("/api", routes);
 
 const PORT = process.env.PORT || 8081;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });
 
 module.exports = app;

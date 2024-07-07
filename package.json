@@ -1,13 +1,16 @@
 {
-  "name": "project-verena-weikert",
+  "name": "crud-athenticator-project",
   "version": "1.0.0",
-  "description": "Aplicação CRUD para gerenciamento de usuários",
+  "description": "Aplicação CRUD para gerenciamento e autenticação de usuários",
   "main": "dist/index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "build": "tsc",
     "dev": "nodemon",
-    "build": "tsc && mv dist public",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "test": "jest",
     "test:watch": "jest --watch",
     "migrate": "prisma migrate dev",
