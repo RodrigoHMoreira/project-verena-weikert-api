@@ -2,5 +2,10 @@
   "version": 2,
   "name": "crud-athenticator-project",
   "builds": [{ "src": "src/index.ts", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "src/index.ts" }]
+  "routes": [{ "src": "/(.*)", "dest": "src/index.ts" }],
+  "build": {
+    "env": {
+      "PRISMA_CLIENT_ENGINE_TYPE": "binary"
+    }
+  }
 }
