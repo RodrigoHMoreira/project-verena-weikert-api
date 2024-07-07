@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 import UserService from "../services/userService";
 import { User } from "../interfaces/User";
-import { UserDTO } from "../interfaces/UserDTO";
+import { UserDTO } from "../interfaces/userDTO";
 
 const userService = new UserService();
 const prisma = new PrismaClient();

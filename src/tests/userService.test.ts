@@ -1,8 +1,8 @@
-import { User } from "../src/interfaces/User";
-import { userRepository } from "../src/repositories/userRepository";
-import UserService from "../src/services/userService";
+import { User } from "../interfaces/User";
+import { userRepository } from "../repositories/userRepository";
+import UserService from "../services/userService";
 
-jest.mock("../src/repositories/userRepository", () => ({
+jest.mock("../repositories/userRepository", () => ({
   userRepository: {
     findAll: jest.fn(() => Promise.resolve([])),
     countAll: jest.fn(() => Promise.resolve()),
