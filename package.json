@@ -10,11 +10,8 @@
     "start": "ts-node src/index.ts",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "dev": "nodemon",
-    "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
-    "migrate": "prisma migrate dev",
-    "generate": "prisma generate",
     "vercel-build": "tsc && prisma generate && npx prisma migrate deploy"
   },
   "keywords": [
