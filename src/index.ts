@@ -26,7 +26,7 @@ const corsOptions = {
   optionsSuccessStatus: 204
 };
 
-app.use(cors('https://project-verena-weikert-ma4wqwnjs-rodrigohmoreiras-projects.vercel.app'));
+app.use(cors('https://project-verena-weikert-ma4wqwnjs-rodrigohmoreiras-projects.vercel.app/'));
 
 app.use("/api", routes);
 
